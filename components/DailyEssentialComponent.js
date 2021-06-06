@@ -31,6 +31,9 @@ class DailyEssentials extends Component {
 						titleStyle={{ color: "black" }}
 						type="clear"
 						color="white"
+						onPress={() =>
+							navigate("DailyEssentialsInfo", { essentialsId: item.id })
+						}
 						raised
 					/>
 				</Card>

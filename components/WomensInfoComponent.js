@@ -6,20 +6,20 @@ import { baseUrl } from "../shared/baseUrl";
 
 const mapStateToProps = (state) => {
 	return {
-		menscollection: state.menscollection
+		womenscollection: state.womenscollection
 	};
 };
 
-function RenderItem({ mensitem }) {
-	if (mensitem) {
+function RenderItem({ womensitem }) {
+	if (womensitem) {
 		return (
 			<ScrollView>
 				<Image
-					source={{ uri: baseUrl + mensitem.image }}
+					source={{ uri: baseUrl + womensitem.image }}
 					style={{ height: 800 }}
 				/>
 				<Card
-					title={mensitem.title}
+					title={womensitem.title}
 					titleStyle={{ fontSize: 36, fontWeight: "bold" }}
 					wrapperStyle={{ alignItems: "center" }}>
 					<Text
@@ -28,13 +28,14 @@ function RenderItem({ mensitem }) {
 							fontWeight: "bold",
 							marginBottom: 10
 						}}>
-						{mensitem.price}
+						{womensitem.price}
 					</Text>
 					<ButtonGroup
-						buttons={mensitem.buttons}
+						buttons={womensitem.buttons}
 						textStyle={{
 							fontWeight: "bold",
 							fontSize: 18,
+
 							marginBottom: 10
 						}}
 					/>
@@ -50,24 +51,24 @@ function RenderItem({ mensitem }) {
 	return <View />;
 }
 
-class MensInfo extends Component {
+class WomensInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
 
 	static navigationOptions = {
-		title: "Shop Mens Collection"
+		title: "Shop Womens Collection"
 	};
 
 	render() {
-		const mensId = this.props.navigation.getParam("mensId");
-		const mensitem = this.props.menscollection.menscollection.filter(
-			(mensitem) => mensitem.id === mensId
+		const womensId = this.props.navigation.getParam("womensId");
+		const womensitem = this.props.womenscollection.womenscollection.filter(
+			(womensitem) => womensitem.id === womensId
 		)[0];
 
-		return <RenderItem mensitem={mensitem} />;
+		return <RenderItem womensitem={womensitem} />;
 	}
 }
 
-export default connect(mapStateToProps)(MensInfo);
+export default connect(mapStateToProps)(WomensInfo);

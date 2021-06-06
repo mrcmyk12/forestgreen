@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Home from "./HomeComponent";
 import Collection from "./CollectionComponent";
 import MensCollection from "./MensCollectionComponent";
+import MensInfo from "./MensInfoComponent";
 import WomensCollection from "./WomensCollectionComponent";
+import WomensInfo from "./WomensInfoComponent";
 import Blog from "./BlogComponent";
 import { View, Platform, ScrollView } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
@@ -11,6 +13,7 @@ import { createAppContainer } from "react-navigation";
 import { COLLECTIONS } from "../shared/collections";
 import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 import DailyEssentials from "./DailyEssentialComponent";
+import DailyEssentialsInfo from "./DailyEssentialsInfoComponent";
 import { connect } from "react-redux";
 import {
 	fetchDailyEssentials,
@@ -53,7 +56,11 @@ const CollectionNavigator = createStackNavigator(
 	{
 		Collection: { screen: Collection },
 		MensCollection: { screen: MensCollection },
-		WomensCollection: { screen: WomensCollection }
+		MensInfo: { screen: MensInfo },
+		WomensCollection: { screen: WomensCollection },
+		WomensInfo: { screen: WomensInfo },
+		DailyEssentials: { screen: DailyEssentials },
+		DailyEssentialsInfo: { screen: DailyEssentialsInfo }
 	},
 	{
 		initialRouteName: "Collection",
@@ -69,10 +76,65 @@ const CollectionNavigator = createStackNavigator(
 	}
 );
 
+const DailyEssentialsNavigator = createStackNavigator(
+	{
+		DailyEssentials: { screen: DailyEssentials },
+		DailyEssentialsInfo: { screen: DailyEssentialsInfo }
+	},
+	{
+		initialRouteName: "Collection",
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: "#000000"
+			},
+			headerTintColor: "#fff",
+			headerTitleStyle: {
+				color: "#fff"
+			}
+		}
+	}
+);
+
+const MensCollectionNavigator = createStackNavigator(
+	{
+		MensCollection: { screen: MensCollection }
+	},
+	{
+		initialRouteName: "Men's Collection",
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: "#000000"
+			},
+			headerTintColor: "#fff",
+			headerTitleStyle: {
+				color: "#fff"
+			}
+		}
+	}
+);
+
+const WomensCollectionNavigator = createStackNavigator(
+	{
+		WomensCollection: { screen: WomensCollection }
+	},
+	{
+		initialRouteName: "Womens Collection",
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: "#000000"
+			},
+			headerTintColor: "#fff",
+			headerTitleStyle: {
+				color: "#fff"
+			}
+		}
+	}
+);
+
 const MainNavigator = createDrawerNavigator(
 	{
-		Home: { screen: Home },
-		Collection: { screen: Collection },
+		Home: { screen: HomeNavigator },
+		Collection: { screen: CollectionNavigator },
 		MensCollection: { screen: MensCollection },
 		WomensCollection: { screen: WomensCollection },
 		DailyEssentials: { screen: DailyEssentials },
@@ -95,9 +157,7 @@ class Main extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			collections: COLLECTIONS
-		};
+		this.state = {};
 	}
 
 	render() {

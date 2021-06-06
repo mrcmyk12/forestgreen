@@ -31,6 +31,7 @@ class WomensCollection extends Component {
 						titleStyle={{ color: "black" }}
 						type="clear"
 						color="white"
+						onPress={() => navigate("WomensInfo", { womensId: item.id })}
 						raised
 					/>
 				</Card>

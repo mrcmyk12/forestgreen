@@ -6,20 +6,20 @@ import { baseUrl } from "../shared/baseUrl";
 
 const mapStateToProps = (state) => {
 	return {
-		menscollection: state.menscollection
+		dailyessentials: state.dailyessentials
 	};
 };
 
-function RenderItem({ mensitem }) {
-	if (mensitem) {
+function RenderItem({ essentialitem }) {
+	if (essentialitem) {
 		return (
 			<ScrollView>
 				<Image
-					source={{ uri: baseUrl + mensitem.image }}
+					source={{ uri: baseUrl + essentialitem.image }}
 					style={{ height: 800 }}
 				/>
 				<Card
-					title={mensitem.title}
+					title={essentialitem.title}
 					titleStyle={{ fontSize: 36, fontWeight: "bold" }}
 					wrapperStyle={{ alignItems: "center" }}>
 					<Text
@@ -28,16 +28,9 @@ function RenderItem({ mensitem }) {
 							fontWeight: "bold",
 							marginBottom: 10
 						}}>
-						{mensitem.price}
+						{essentialitem.price}
 					</Text>
-					<ButtonGroup
-						buttons={mensitem.buttons}
-						textStyle={{
-							fontWeight: "bold",
-							fontSize: 18,
-							marginBottom: 10
-						}}
-					/>
+
 					<Button
 						title="Add to Cart"
 						titleStyle={{ fontWeight: "bold" }}
@@ -50,24 +43,24 @@ function RenderItem({ mensitem }) {
 	return <View />;
 }
 
-class MensInfo extends Component {
+class DailyEssentialsInfo extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
 
 	static navigationOptions = {
-		title: "Shop Mens Collection"
+		title: "Shop Daily Essentials"
 	};
 
 	render() {
-		const mensId = this.props.navigation.getParam("mensId");
-		const mensitem = this.props.menscollection.menscollection.filter(
-			(mensitem) => mensitem.id === mensId
+		const essentialsId = this.props.navigation.getParam("essentialsId");
+		const essentialitem = this.props.dailyessentials.dailyessentials.filter(
+			(essentialitem) => essentialitem.id === essentialsId
 		)[0];
 
-		return <RenderItem mensitem={mensitem} />;
+		return <RenderItem essentialitem={essentialitem} />;
 	}
 }
 
-export default connect(mapStateToProps)(MensInfo);
+export default connect(mapStateToProps)(DailyEssentialsInfo);

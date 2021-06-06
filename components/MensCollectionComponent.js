@@ -38,13 +38,12 @@ class MensCollection extends Component {
 					title={item.title}
 					featuredSubtitle={item.price}
 					image={{ uri: baseUrl + item.image }}>
-					<Text>{item.subtitle}</Text>
 					<Button
 						title="Add to Cart"
 						titleStyle={{ color: "black" }}
 						type="clear"
 						color="white"
-						onPress={() => this.props.onPress(item.id)}
+						onPress={() => navigate("MensInfo", { mensId: item.id })}
 						raised
 					/>
 				</Card>
