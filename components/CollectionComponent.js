@@ -12,7 +12,7 @@ class Collection extends Component {
 		const { navigate } = this.props.navigation;
 
 		return (
-			<ScrollView>
+			<View>
 				<Tile
 					title="Shop Men's Collection"
 					featured
@@ -25,7 +25,7 @@ class Collection extends Component {
 					imageSrc={require("../assets/pexels-anna-shvets-4672244.jpg")}
 					onPress={() => navigate("WomensCollection")}
 				/>
-			</ScrollView>
+			</View>
 		);
 	}
 }

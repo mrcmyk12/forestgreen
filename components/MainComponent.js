@@ -6,6 +6,7 @@ import MensInfo from "./MensInfoComponent";
 import WomensCollection from "./WomensCollectionComponent";
 import WomensInfo from "./WomensInfoComponent";
 import Blog from "./BlogComponent";
+import Cart from "./CartComponent";
 import { View, Platform, ScrollView } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -31,15 +32,28 @@ const mapDispatchToProps = {
 
 const HomeNavigator = createStackNavigator(
 	{
-		Home: { screen: Home },
-		Collection: { screen: Collection },
-		MensCollection: { screen: MensCollection },
-		WomensCollection: { screen: WomensCollection },
-		DailyEssentials: { screen: DailyEssentials },
-		Blog: { screen: Blog }
+		Home: { screen: Home }
 	},
 	{
 		initialRouteName: "Home",
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: "#000000"
+			},
+			headerTintColor: "#fff",
+			headerTitleStyle: {
+				color: "#fff"
+			}
+		}
+	}
+);
+
+const CartNavigator = createStackNavigator(
+	{
+		Cart: { screen: Cart }
+	},
+	{
+		initialRouteName: "Cart",
 		defaultNavigationOptions: {
 			headerStyle: {
 				backgroundColor: "#000000"
@@ -138,7 +152,8 @@ const MainNavigator = createDrawerNavigator(
 		MensCollection: { screen: MensCollection },
 		WomensCollection: { screen: WomensCollection },
 		DailyEssentials: { screen: DailyEssentials },
-		Blog: { screen: Blog }
+		Blog: { screen: Blog },
+		Cart: { screen: CartNavigator }
 	},
 	{
 		drawerBackgroundColor: "#fff"

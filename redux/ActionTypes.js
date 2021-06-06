@@ -13,3 +13,6 @@ export const DAILYESSENTIALS_FAILED = "DAILYESSENTIALS_FAILED";
 export const BLOG_LOADING = "BLOG_LOADING";
 export const ADD_BLOG = "ADD_BLOG";
 export const BLOG_FAILED = "BLOG_FAILED";
+
+export const ADD_CART = "ADD_CART";
+export const DELETE_CART = "DELETE_CART";
