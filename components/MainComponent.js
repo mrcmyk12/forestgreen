@@ -33,6 +33,11 @@ const mapDispatchToProps = {
 const HomeNavigator = createStackNavigator(
 	{
 		Home: { screen: Home },
+		Collection: { screen: Collection },
+		MensCollection: { screen: MensCollection },
+		MensInfo: { screen: MensInfo },
+		WomensCollection: { screen: WomensCollection },
+		WomensInfo: { screen: WomensInfo },
 		DailyEssentials: { screen: DailyEssentials },
 		DailyEssentialsInfo: { screen: DailyEssentialsInfo }
 	},
@@ -74,7 +79,8 @@ const CollectionNavigator = createStackNavigator(
 		MensCollection: { screen: MensCollection },
 		MensInfo: { screen: MensInfo },
 		WomensCollection: { screen: WomensCollection },
-		WomensInfo: { screen: WomensInfo }
+		WomensInfo: { screen: WomensInfo },
+		Home: { screen: Home }
 	},
 	{
 		initialRouteName: "Collection",

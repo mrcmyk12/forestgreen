@@ -8,7 +8,9 @@ export const dailyessentialscart = (state = [], action) => {
 			}
 			return state.concat(action.payload);
 		case ActionTypes.DELETE_DAILYESSENTIALSCART:
-			return state.filter((cart) => cart !== action.payload);
+			return state.filter(
+				(dailyessentialscart) => dailyessentialscart !== action.payload
+			);
 		default:
 			return state;
 	}

@@ -8,7 +8,7 @@ export const menscart = (state = [], action) => {
 			}
 			return state.concat(action.payload);
 		case ActionTypes.DELETE_MENSCART:
-			return state.filter((cart) => cart !== action.payload);
+			return state.filter((menscart) => menscart !== action.payload);
 		default:
 			return state;
 	}

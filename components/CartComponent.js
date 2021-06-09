@@ -8,7 +8,10 @@ const mapStateToProps = (state) => {
 	return {
 		menscollection: state.menscollection,
 		womenscollection: state.womenscollection,
-		dailyessentials: state.dailyessentials
+		dailyessentials: state.dailyessentials,
+		menscart: state.menscart,
+		womenscart: state.womenscart,
+		dailyessentialscart: state.dailyessentialscart
 	};
 };
 
@@ -30,8 +33,18 @@ class Cart extends Component {
 			);
 		};
 
+		const renderWomensCartItem = ({ item }) => {
+			return (
+				<ListItem
+					title={item.title}
+					leftAvatar={{ source: { uri: baseUrl + item.image } }}
+					rightElement={item.price}
+				/>
+			);
+		};
+
 		return (
-			<ScrollView>
+			<View>
 				<FlatList
 					data={this.props.menscollection.menscollection.filter(
 						(mensitem) => this.props.menscart.includes(mensitem.id)
@@ -41,20 +54,20 @@ class Cart extends Component {
 				/>
 				<FlatList
 					data={this.props.womenscollection.womenscollection.filter(
-						(womensItem) => this.props.womenscart.includes(womensItem.id)
+						(womensitem) => this.props.womenscart.includes(womensitem.id)
 					)}
-					renderItem={renderCartItem}
+					renderItem={renderWomensCartItem}
 					keyExtractor={(item) => item.id.toString()}
 				/>
 				<FlatList
-					data={this.props.dailyessentialscollection.dailyessentialscollection.filter(
+					data={this.props.dailyessentials.dailyessentials.filter(
 						(essentialsItem) =>
 							this.props.dailyessentialscart.includes(essentialsItem.id)
 					)}
 					renderItem={renderCartItem}
 					keyExtractor={(item) => item.id.toString()}
 				/>
-			</ScrollView>
+			</View>
 		);
 	}
 }

@@ -54,7 +54,7 @@ function RenderItem(props) {
 							props.addToCart();
 							Alert.alert(
 								"Item Added to Cart",
-								`${womensitem.title} Added to Cart`,
+								`${womensitem.title} added to cart`,
 								[
 									{
 										text: "Ok",
