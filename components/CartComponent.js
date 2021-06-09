@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FlatList, View, Text } from "react-native";
+import { FlatList, View, Text, ScrollView } from "react-native";
 import { ListItem } from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
@@ -31,13 +31,30 @@ class Cart extends Component {
 		};
 
 		return (
-			<FlatList
-				data={this.props.menscollection.menscollection.filter((mensItem) =>
-					this.props.cart.includes(mensItem.id)
-				)}
-				renderItem={renderCartItem}
-				keyExtractor={(item) => item.id.toString()}
-			/>
+			<ScrollView>
+				<FlatList
+					data={this.props.menscollection.menscollection.filter(
+						(mensitem) => this.props.menscart.includes(mensitem.id)
+					)}
+					renderItem={renderCartItem}
+					keyExtractor={(item) => item.id.toString()}
+				/>
+				<FlatList
+					data={this.props.womenscollection.womenscollection.filter(
+						(womensItem) => this.props.womenscart.includes(womensItem.id)
+					)}
+					renderItem={renderCartItem}
+					keyExtractor={(item) => item.id.toString()}
+				/>
+				<FlatList
+					data={this.props.dailyessentialscollection.dailyessentialscollection.filter(
+						(essentialsItem) =>
+							this.props.dailyessentialscart.includes(essentialsItem.id)
+					)}
+					renderItem={renderCartItem}
+					keyExtractor={(item) => item.id.toString()}
+				/>
+			</ScrollView>
 		);
 	}
 }

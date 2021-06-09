@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, Alert } from "react-native";
 import { Card, Image, ButtonGroup, Button } from "react-native-elements";
+import { postWomensCart } from "../redux/ActionCreators";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 
@@ -10,7 +11,13 @@ const mapStateToProps = (state) => {
 	};
 };
 
-function RenderItem({ womensitem }) {
+const mapDispatchtoProps = {
+	postWomensCart: (womensId) => postWomensCart(womensId)
+};
+
+function RenderItem(props) {
+	const { womensitem } = props;
+
 	if (womensitem) {
 		return (
 			<ScrollView>
@@ -43,6 +50,20 @@ function RenderItem({ womensitem }) {
 						title="Add to Cart"
 						titleStyle={{ fontWeight: "bold" }}
 						buttonStyle={{ backgroundColor: "black" }}
+						onPress={() => {
+							props.addToCart();
+							Alert.alert(
+								"Item Added to Cart",
+								`${womensitem.title} Added to Cart`,
+								[
+									{
+										text: "Ok",
+										onPress: () => console.log("Ok Pressed"),
+										style: "cancel"
+									}
+								]
+							);
+						}}
 					/>
 				</Card>
 			</ScrollView>
@@ -61,14 +82,23 @@ class WomensInfo extends Component {
 		title: "Shop Womens Collection"
 	};
 
+	addToCart(womensId) {
+		this.props.postWomensCart(womensId);
+	}
+
 	render() {
 		const womensId = this.props.navigation.getParam("womensId");
 		const womensitem = this.props.womenscollection.womenscollection.filter(
 			(womensitem) => womensitem.id === womensId
 		)[0];
 
-		return <RenderItem womensitem={womensitem} />;
+		return (
+			<RenderItem
+				womensitem={womensitem}
+				addToCart={() => this.addToCart()}
+			/>
+		);
 	}
 }
 
-export default connect(mapStateToProps)(WomensInfo);
+export default connect(mapStateToProps, mapDispatchtoProps)(WomensInfo);

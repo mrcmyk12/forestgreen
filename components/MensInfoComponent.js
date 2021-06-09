@@ -1,16 +1,24 @@
 import React, { Component } from "react";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, Alert } from "react-native";
 import { Card, Image, ButtonGroup, Button } from "react-native-elements";
 import { connect } from "react-redux";
+import { postMensCart } from "../redux/ActionCreators";
 import { baseUrl } from "../shared/baseUrl";
 
 const mapStateToProps = (state) => {
 	return {
-		menscollection: state.menscollection
+		menscollection: state.menscollection,
+		menscart: state.menscart
 	};
 };
 
-function RenderItem({ mensitem }) {
+const mapDispatchtoProps = {
+	postMensCart: (mensId) => postMensCart(mensId)
+};
+
+function RenderItem(props) {
+	const { mensitem } = props;
+
 	if (mensitem) {
 		return (
 			<ScrollView>
@@ -42,6 +50,20 @@ function RenderItem({ mensitem }) {
 						title="Add to Cart"
 						titleStyle={{ fontWeight: "bold" }}
 						buttonStyle={{ backgroundColor: "black" }}
+						onPress={() => {
+							props.addToCart();
+							Alert.alert(
+								"Item Added to Cart",
+								`${mensitem.title} Added to Cart`,
+								[
+									{
+										text: "Ok",
+										onPress: () => console.log("Ok Pressed"),
+										style: "cancel"
+									}
+								]
+							);
+						}}
 					/>
 				</Card>
 			</ScrollView>
@@ -60,14 +82,23 @@ class MensInfo extends Component {
 		title: "Shop Mens Collection"
 	};
 
+	addToCart(mensId) {
+		this.props.postMensCart(mensId);
+	}
+
 	render() {
 		const mensId = this.props.navigation.getParam("mensId");
 		const mensitem = this.props.menscollection.menscollection.filter(
 			(mensitem) => mensitem.id === mensId
 		)[0];
 
-		return <RenderItem mensitem={mensitem} />;
+		return (
+			<RenderItem
+				mensitem={mensitem}
+				addToCart={() => this.addToCart(mensId)}
+			/>
+		);
 	}
 }
 
-export default connect(mapStateToProps)(MensInfo);
+export default connect(mapStateToProps, mapDispatchtoProps)(MensInfo);

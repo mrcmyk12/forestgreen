@@ -162,3 +162,51 @@ export const addBlog = (blog) => ({
 	type: ActionTypes.ADD_BLOG,
 	payload: blog
 });
+
+export const postMensCart = (mensId) => (dispatch) => {
+	setTimeout(() => {
+		dispatch(addMensCart(mensId));
+	}, 2000);
+};
+
+export const addMensCart = (mensId) => ({
+	type: ActionTypes.ADD_MENSCART,
+	payload: mensId
+});
+
+export const deleteMensCart = (mensId) => ({
+	type: ActionTypes.DELETE_MENSCART,
+	payload: mensId
+});
+
+export const postWomensCart = (womensId) => (dispatch) => {
+	setTimeout(() => {
+		dispatch(addWomensCart(womensId));
+	}, 2000);
+};
+
+export const addWomensCart = (womensId) => ({
+	type: ActionTypes.ADD_WOMENSCART,
+	payload: womensId
+});
+
+export const deleteWomensCart = (womensId) => ({
+	type: ActionTypes.DELETE_WOMENSCART,
+	payload: womensId
+});
+
+export const postDailyEssentialsCart = (essentialsId) => (dispatch) => {
+	setTimeout(() => {
+		dispatch(addDailyEssentialsCart(essentialsId));
+	}, 2000);
+};
+
+export const addDailyEssentialsCart = (essentialsId) => ({
+	type: ActionTypes.ADD_DAILYESSENTIALSCART,
+	payload: essentialsId
+});
+
+export const deleteDailyEssentialsCart = (essentialsId) => ({
+	type: ActionTypes.DELETE_DAILYESSENTIALSCART,
+	payload: essentialsId
+});
