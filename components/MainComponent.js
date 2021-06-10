@@ -7,6 +7,7 @@ import WomensCollection from "./WomensCollectionComponent";
 import WomensInfo from "./WomensInfoComponent";
 import Blog from "./BlogComponent";
 import Cart from "./CartComponent";
+import Welcome from "./WelcomeComponent";
 import { View, Platform, ScrollView } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -34,10 +35,6 @@ const HomeNavigator = createStackNavigator(
 	{
 		Home: { screen: Home },
 		Collection: { screen: Collection },
-		MensCollection: { screen: MensCollection },
-		MensInfo: { screen: MensInfo },
-		WomensCollection: { screen: WomensCollection },
-		WomensInfo: { screen: WomensInfo },
 		DailyEssentials: { screen: DailyEssentials },
 		DailyEssentialsInfo: { screen: DailyEssentialsInfo }
 	},
@@ -153,6 +150,7 @@ const WomensCollectionNavigator = createStackNavigator(
 
 const MainNavigator = createDrawerNavigator(
 	{
+		Welcome: { screen: Welcome },
 		Home: { screen: HomeNavigator },
 		Collection: { screen: CollectionNavigator },
 		MensCollection: { screen: MensCollection },

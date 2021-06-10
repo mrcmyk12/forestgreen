@@ -26,7 +26,7 @@ class DailyEssentials extends Component {
 					featuredSubtitle={item.price}
 					image={{ uri: baseUrl + item.image }}>
 					<Button
-						title="Add to Cart"
+						title="More Info"
 						titleStyle={{ color: "black" }}
 						type="clear"
 						color="white"

@@ -38,14 +38,7 @@ function RenderItem(props) {
 						}}>
 						{mensitem.price}
 					</Text>
-					<ButtonGroup
-						buttons={mensitem.buttons}
-						textStyle={{
-							fontWeight: "bold",
-							fontSize: 18,
-							marginBottom: 10
-						}}
-					/>
+
 					<Button
 						title="Add to Cart"
 						titleStyle={{ fontWeight: "bold" }}
@@ -75,7 +68,14 @@ function RenderItem(props) {
 class MensInfo extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			selectedIndex: 2
+		};
+		this.updateIndex = this.updateIndex.bind(this);
+	}
+
+	updateIndex(selectedIndex) {
+		this.setState({ selectedIndex });
 	}
 
 	static navigationOptions = {
@@ -92,11 +92,30 @@ class MensInfo extends Component {
 			(mensitem) => mensitem.id === mensId
 		)[0];
 
+		const { selectedIndex } = this.state;
+
 		return (
-			<RenderItem
-				mensitem={mensitem}
-				addToCart={() => this.addToCart(mensId)}
-			/>
+			<ScrollView>
+				<RenderItem
+					mensitem={mensitem}
+					addToCart={() => this.addToCart(mensId)}
+					updateIndex={() => this.updateIndex}
+				/>
+				<Text style={{ fontSize: 24, fontWeight: "bold" }}>
+					Select Size
+				</Text>
+				<ButtonGroup
+					onPress={this.updateIndex}
+					selectedIndex={selectedIndex}
+					buttons={mensitem.buttons}
+					selectedButtonStyle={{ backgroundColor: "black" }}
+					textStyle={{
+						fontWeight: "bold",
+						fontSize: 18,
+						marginBottom: 10
+					}}
+				/>
+			</ScrollView>
 		);
 	}
 }
