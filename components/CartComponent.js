@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import { FlatList, View, Text, ScrollView } from "react-native";
+import { SwipeRow } from "react-native-swipe-list-view";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { FlatList, View, Text, ScrollView, StyleSheet } from "react-native";
 import { ListItem } from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
+import {
+	deleteDailyEssentialsCart,
+	deleteMensCart,
+	deleteWomensCart
+} from "../redux/ActionCreators";
 
 const mapStateToProps = (state) => {
 	return {
@@ -15,6 +22,13 @@ const mapStateToProps = (state) => {
 	};
 };
 
+const mapDispatchtoProps = {
+	deleteMensCart: (mensId) => deleteMensCart(mensId),
+	deleteWomensCart: (womensId) => deleteWomensCart(womensId),
+	deleteDailyEssentialsCart: (essentialsId) =>
+		deleteDailyEssentialsCart(essentialsId)
+};
+
 class Cart extends Component {
 	static navigationOptions = {
 		title: "Cart"
@@ -23,23 +37,68 @@ class Cart extends Component {
 	render() {
 		const { navigate } = this.props.navigation;
 
-		const renderCartItem = ({ item }) => {
+		const renderMensCartItem = ({ item }) => {
 			return (
-				<ListItem
-					title={item.title}
-					leftAvatar={{ source: { uri: baseUrl + item.image } }}
-					rightElement={item.price}
-				/>
+				<SwipeRow rightOpenValue={-100} style={styles.swipeRow}>
+					<View style={styles.deleteView}>
+						<TouchableOpacity
+							style={styles.deleteTouchable}
+							onPress={() => this.props.deleteMensCart(item.id)}>
+							<Text style={styles.deleteText}>Delete</Text>
+						</TouchableOpacity>
+					</View>
+					<View>
+						<ListItem
+							title={item.title}
+							leftAvatar={{ source: { uri: baseUrl + item.image } }}
+							rightElement={item.price}
+						/>
+					</View>
+				</SwipeRow>
 			);
 		};
 
 		const renderWomensCartItem = ({ item }) => {
 			return (
-				<ListItem
-					title={item.title}
-					leftAvatar={{ source: { uri: baseUrl + item.image } }}
-					rightElement={item.price}
-				/>
+				<SwipeRow rightOpenValue={-100} style={styles.swipeRow}>
+					<View style={styles.deleteView}>
+						<TouchableOpacity
+							style={styles.deleteTouchable}
+							onPress={() => this.props.deleteWomensCart(item.id)}>
+							<Text style={styles.deleteText}>Delete</Text>
+						</TouchableOpacity>
+					</View>
+					<View>
+						<ListItem
+							title={item.title}
+							leftAvatar={{ source: { uri: baseUrl + item.image } }}
+							rightElement={item.price}
+						/>
+					</View>
+				</SwipeRow>
+			);
+		};
+
+		const renderDailyEssentialsCartItem = ({ item }) => {
+			return (
+				<SwipeRow rightOpenValue={-100} style={styles.swipeRow}>
+					<View style={styles.deleteView}>
+						<TouchableOpacity
+							style={styles.deleteTouchable}
+							onPress={() =>
+								this.props.deleteDailyEssentialsCart(item.id)
+							}>
+							<Text style={styles.deleteText}>Delete</Text>
+						</TouchableOpacity>
+					</View>
+					<View>
+						<ListItem
+							title={item.title}
+							leftAvatar={{ source: { uri: baseUrl + item.image } }}
+							rightElement={item.price}
+						/>
+					</View>
+				</SwipeRow>
 			);
 		};
 
@@ -49,7 +108,7 @@ class Cart extends Component {
 					data={this.props.menscollection.menscollection.filter(
 						(mensitem) => this.props.menscart.includes(mensitem.id)
 					)}
-					renderItem={renderCartItem}
+					renderItem={renderMensCartItem}
 					keyExtractor={(item) => item.id.toString()}
 				/>
 				<FlatList
@@ -64,7 +123,7 @@ class Cart extends Component {
 						(essentialsItem) =>
 							this.props.dailyessentialscart.includes(essentialsItem.id)
 					)}
-					renderItem={renderCartItem}
+					renderItem={renderDailyEssentialsCartItem}
 					keyExtractor={(item) => item.id.toString()}
 				/>
 			</View>
@@ -72,4 +131,26 @@ class Cart extends Component {
 	}
 }
 
-export default connect(mapStateToProps)(Cart);
+const styles = StyleSheet.create({
+	deleteView: {
+		flexDirection: "row",
+		justifyContent: "flex-end",
+		alignItems: "center",
+		flex: 1
+	},
+	deleteTouchable: {
+		backgroundColor: "red",
+		height: "100%",
+		justifyContent: "center"
+	},
+
+	deleteText: {
+		color: "white",
+		fontWeight: "700",
+		textAlign: "center",
+		fontSize: 16,
+		width: 100
+	}
+});
+
+export default connect(mapStateToProps, mapDispatchtoProps)(Cart);

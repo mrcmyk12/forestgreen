@@ -7,7 +7,8 @@ import { baseUrl } from "../shared/baseUrl";
 
 const mapStateToProps = (state) => {
 	return {
-		womenscollection: state.womenscollection
+		womenscollection: state.womenscollection,
+		womenscart: state.womenscart
 	};
 };
 
@@ -95,7 +96,7 @@ class WomensInfo extends Component {
 		return (
 			<RenderItem
 				womensitem={womensitem}
-				addToCart={() => this.addToCart()}
+				addToCart={() => this.addToCart(womensId)}
 			/>
 		);
 	}

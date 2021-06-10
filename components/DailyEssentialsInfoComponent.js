@@ -7,7 +7,8 @@ import { baseUrl } from "../shared/baseUrl";
 
 const mapStateToProps = (state) => {
 	return {
-		dailyessentials: state.dailyessentials
+		dailyessentials: state.dailyessentials,
+		dailyessentialscart: state.dailyessentialscart
 	};
 };
 
@@ -88,7 +89,7 @@ class DailyEssentialsInfo extends Component {
 		return (
 			<RenderItem
 				essentialitem={essentialitem}
-				addToCart={() => this.addToCart()}
+				addToCart={() => this.addToCart(essentialsId)}
 			/>
 		);
 	}
